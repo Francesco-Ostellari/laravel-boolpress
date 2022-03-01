@@ -45,25 +45,13 @@ class PostController extends Controller
         ]);
 
         $data = $request->all();
-
-        $slug = Str::slug($data['title'], '-');
-        $postPresente = Post::where('slug', $slug)->first();
-
-
-        $counter = 0;
-        while ($postPresente) {
-            $slug = $slug . '-' . $counter;
-            $postPresente = Post::where('slug', $slug)->first();
-            $counter++;
-        }
-
         $newPost = new Post();
 
         $newPost->fill($data);
-        $newPost->slug = $slug;
+        $newPost->slug = $newPost->createSlug($data['title']);
         $newPost->save();
 
-        return redirect()->route('admin.posts.show', ['post' => $newPost]);
+        return redirect()->route('admin.posts.show', $newPost->slug);
     }
 
     /**
@@ -106,8 +94,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post) 
     {
-        //
+        $post-> delete();
+        return redirect()-> route('admin.posts.index')->with('status', "Post id $post->id deleted");
     }
 }

@@ -5,6 +5,7 @@ use Illuminate\Support\Str;
 use App\User;
 
 use App\Model\Post;
+use App\Model\Category;
 use Illuminate\Database\Seeder;
 
 class PostSeeder extends Seeder
@@ -22,6 +23,7 @@ class PostSeeder extends Seeder
             $newPost->content = $faker->paragraphs(5, true);
             $newPost->slug = Str::slug($newPost->title . '-' . $i, '-');
             $newPost->user_id = User::inRandomOrder()->first()->id;
+            $newPost->category_id = Category::inRandomOrder()->first()->id;
             $newPost->save();
         }
     }

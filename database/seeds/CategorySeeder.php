@@ -17,7 +17,7 @@ class CategorySeeder extends Seeder
         for ($i=0; $i < 10; $i++) { 
             $newCategory = new Category();
             $newCategory->name = $faker->words(2, true);
-            $title = "$newCategory->title-$i";
+            $title = "$newCategory->name-$i";
             $newCategory->slug = Str::slug($title, '-');
             $newCategory->save();
         }

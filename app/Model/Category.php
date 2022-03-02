@@ -13,6 +13,11 @@ class Category extends Model
         'updated_at'
     ];
 
+    public function getRouteKeyName() 
+    {
+        return 'slug';
+    }
+
     public function posts()
     {
         return $this->hasMany('App\Model\Post');

@@ -22,42 +22,57 @@
 </head>
 
 <body>
-  <div id="app">
-      @include('partials.header')
-      <main class="py-4">
-        <div class="container-fluid">
-          <div class="row">
-              <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                  <div class="position-sticky pt-3">
-                      <ul class="nav flex-column">
-                          <li class="nav-item">
-                              <a class="nav-link active" aria-current="page" href="{{route('admin.home')}}">
-                                  <i class="bi bi-house"></i>
-                                  Dashboard
-                              </a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="{{route('admin.posts.index')}}">
-                                  <i class="bi bi-files"></i>
-                                  Posts
-                              </a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="{{route('admin.categories.index')}}">
-                                  <i class="bi bi-folder"></i>
-                                  Categories
-                              </a>
-                          </li>
-                      </ul>
-                  </div>
-              </nav>
-              <div class="col">
+    <div id="app">
+        {{-- header --}}
+        @include('partials.header')
 
-                  @yield('content')
-              </div>
-          </div>
-        </div>
-      </main>
+        {{-- main --}}
+        <main class="py-4">
+            <div class="container-fluid">
+                <div class="row">
+                    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                        <div class="position-sticky pt-3">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link active btn btn-primary" aria-current="page"
+                                        href="{{ route('admin.posts.create') }}">
+                                        Add Post
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="{{ route('admin.home') }}">
+                                        <i class="bi bi-house"></i>
+                                        Dashboard
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.categories.index') }}">
+                                        <i class="bi bi-files"></i>
+                                        All Categories
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.posts.index') }}">
+                                        <i class="bi bi-files"></i>
+                                        All Posts
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.posts.indexUser') }}">
+                                        <i class="bi bi-files"></i>
+                                        My Posts
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <div class="col">
+                        @yield('content')
+                    </div>
+                </div>
+
+        </main>
     </div>
 </body>
+
 </html>

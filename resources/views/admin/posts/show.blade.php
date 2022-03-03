@@ -24,5 +24,10 @@
                 {{ $post->content }}
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+                <a class="btn btn-primary mt-2" href="{{ route('admin.posts.index') }}">Go Back</a>
+            </div>
+        </div>
     </div>
 @endsection

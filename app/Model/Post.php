@@ -45,4 +45,8 @@ class Post extends Model
     {
         return $this->belongsTo('App\Model\Category');
     }
+    public function tags() 
+    {
+        return $this->belongsToMany('App\Model\Tag')->withTimestamps();
+    }
 }

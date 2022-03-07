@@ -20,10 +20,10 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::orderBy('created_at', 'desc')->paginate(20);
+        $pageTitle = 'All Post';
 
-        return view('admin.posts.index', ['posts' => $posts]);
+        return view('admin.posts.index', ['posts' => $posts, 'pageTitle' => $pageTitle]);
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -32,7 +32,8 @@ class PostController extends Controller
     public function indexUser()
     {
         $posts = Post::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(20);
-        return view('admin.posts.index', ['posts' => $posts]);
+        $pageTitle = 'My Post';
+        return view('admin.posts.index', ['posts' => $posts, 'pageTitle' => $pageTitle]);
     }
 
     /**
@@ -147,7 +148,12 @@ class PostController extends Controller
         if ($data['category_id'] != $post->category_id) {
             $post->category_id = $data['category_id'];
         }
-
+        if (!empty($data['image'])) {
+            Storage::delete($post->image);
+            $image_path = Storage::put('uploads', $data['image']);
+            $post->image = $image_path;
+        }
+        
         $post->update();
 
         if (!empty($data['tags'])) {
@@ -156,11 +162,6 @@ class PostController extends Controller
             $post->tags()->detach();
         }
 
-        if (!empty($data['image'])) {
-            Storage::delete($post->image);
-            $image_path = Storage::put('uploads', $data['image']);
-            $post->image = $image_path;
-        }
 
         return redirect()->route('admin.posts.show', $post);
     }

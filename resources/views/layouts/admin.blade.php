@@ -27,10 +27,10 @@
         @include('partials.header')
 
         {{-- main --}}
-        <main class="py-4">
+        <main class="">
             <div class="container-fluid">
                 <div class="row">
-                    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark navbar-dark sidebar collapse">
                         <div class="position-sticky pt-3">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
@@ -47,7 +47,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('admin.categories.index') }}">
-                                        <i class="bi bi-files"></i>
+                                        <i class="bi bi-archive"></i>
                                         All Categories
                                     </a>
                                 </li>
@@ -59,7 +59,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('admin.posts.indexUser') }}">
-                                        <i class="bi bi-files"></i>
+                                        <i class="bi bi-file"></i>
                                         My Posts
                                     </a>
                                 </li>

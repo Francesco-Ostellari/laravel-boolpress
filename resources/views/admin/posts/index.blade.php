@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-  <div class="container">
+  <div class="container py-4">
     <div class="row">
       @if (session('status'))
         <div class="alert alert-danger">
@@ -12,7 +12,7 @@
     <div class="row">
       <div class="col">
         <h1>
-          Posts
+          {{$pageTitle}}
         </h1>
       </div>
     </div>

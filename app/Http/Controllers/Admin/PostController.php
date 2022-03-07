@@ -71,7 +71,7 @@ class PostController extends Controller
 
         if (!empty($data['image'])) {
             $image_path = Storage::put('uploads', $data['image']);
-            $data['image']=$image_path;
+            $post['image']=$image_path;
         }
 
         $post = new Post();

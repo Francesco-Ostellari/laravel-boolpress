@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Model\Post;
-
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Model\Category;
 use App\Model\Tag;
@@ -63,10 +63,15 @@ class PostController extends Controller
                 'title' => 'required|max:240',
                 'content' => 'required',
                 'category_id' => 'exists:App\Model\Category,id',
-                'tags.*' => 'nullable|exists:App\Model\Tag,id'
+                'tags.*' => 'nullable|exists:App\Model\Tag,id',
+                'image' => 'nullable|image'
             ]
         );
 
+        if (!empty($data['image'])) {
+            $image_path = Storage::put('uploads', $data['image']);
+            $data['image']=$image_path;
+        }
 
         $post = new Post();
         $post->fill($data);
@@ -127,7 +132,8 @@ class PostController extends Controller
                 'title' => 'required|max:240',
                 'content' => 'required',
                 'category_id' => 'exists:App\Model\Category,id',
-                'tags.*' => 'nullable|exists:App\Model\Tag,id'
+                'tags.*' => 'nullable|exists:App\Model\Tag,id',
+                'image' => 'nullable|image'
             ]
         );
 
@@ -148,6 +154,12 @@ class PostController extends Controller
             $post->tags()->sync($data['tags']);
         } else {
             $post->tags()->detach();
+        }
+
+        if (!empty($data['image'])) {
+            Storage::delete($post->image);
+            $image_path = Storage::put('uploads', $data['image']);
+            $post->image = $image_path;
         }
 
         return redirect()->route('admin.posts.show', $post);

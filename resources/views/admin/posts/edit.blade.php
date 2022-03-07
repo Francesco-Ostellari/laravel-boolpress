@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="row">
-            <form action="{{ route('admin.posts.update', $post) }}" method="post">
+            <form action="{{ route('admin.posts.update', $post) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 <div class="mb-3">
@@ -73,6 +73,20 @@
                     <textarea class="form-control" id="content" rows="3"
                         name="content"> {{ old('content', $post->content) }}</textarea>
                     @error('content')
+                        <div class="alert alert-danger mt-3">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                @if (!empty($post->image))
+                    <div class="mb-3">
+                        <img src="{{asset('storage/' . $post->image)}}" alt="{{$post->title}}">
+                    </div>
+                @endif
+                <div class="mb-3">
+                    <label for="image" class="form-label">Inserisci l'immagine</label>
+                    <input class="form-control" type="file" id="image" name="image">
+                    @error('image')
                         <div class="alert alert-danger mt-3">
                             {{ $message }}
                         </div>

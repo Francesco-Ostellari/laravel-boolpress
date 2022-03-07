@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="row">
-      <form action="{{ route('admin.posts.store') }}" method="post">
+      <form action="{{ route('admin.posts.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('POST')
         <div class="mb-3">
@@ -34,10 +34,10 @@
             </div>
           @enderror
         </div>
-          @error('tags.*')
-            <div class="alert alert-danger mt-3">
-              {{ $message }}
-            </div>
+        @error('tags.*')
+          <div class="alert alert-danger mt-3">
+            {{ $message }}
+          </div>
         @enderror
         <fieldset class="mb-3">
           <legend>Tags</legend>
@@ -67,6 +67,15 @@
             <div class="alert alert-danger mt-3">
               {{ $message }}
             </div>
+          @enderror
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label" name="image">Inserisci l'immagine</label>
+          <input class="form-control" type="file" id="image" name="image">
+          @error('image')
+          <div class="alert alert-danger mt-3">
+            {{ $message }}
+          </div>
           @enderror
         </div>
         <input class="btn btn-primary" type="submit" value="Save">

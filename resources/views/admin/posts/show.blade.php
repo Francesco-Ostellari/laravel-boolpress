@@ -20,9 +20,10 @@
                 <h4>
                     Tags: 
                     @foreach ($post->tags()->get() as $tag) 
-                        {{$tag->name}} 
+                    {{$tag->name}} 
                     @endforeach
                 </h4>
+                <img class="img-fluid" src="{{asset('storage/' . $post->image)}}" alt="{{$post->title}}">
             </div>
         </div>
         <div class="row">

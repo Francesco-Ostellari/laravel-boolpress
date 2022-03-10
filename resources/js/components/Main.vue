@@ -9,10 +9,11 @@
             <h5 class="card-title">{{ post.title }}</h5>
             <p class="card-text">{{ post.content }}</p>
           </div>
+          <router-link class="btn btn-info" :to="{ name: 'post', params: { id: post.id } }">View</router-link>
         </div>
       </div>
     </div>
-    <div class="row mt-3 bg-light">
+    <div class="row mt-3 bg-light" v-if="cards.prev_page_url || cards.next_page_url">
       <ul class="list-inline bg-light">
         <li class="list-inline-item"> <button v-if="cards.prev_page_url" class="btn btn-primary" @click="changePage('prev_page_url')">Prev</button></li>
         <li class="list-inline-item"> <button v-if="cards.next_page_url" class="btn btn-primary" @click="changePage('next_page_url')">Next</button></li>
